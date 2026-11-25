@@ -1,0 +1,129 @@
+TRUNCATE TABLE
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+INSERT 0 1
+psql:week-05/violations.sql:19: ERROR:  23502: null value in column "full_name" of relation "member" violates not-null constraint
+DETAIL:  Failing row contains (2, null, isimsiz@uni.edu.tr, YBS, student).
+SCHEMA NAME:  public
+TABLE NAME:  member
+COLUMN NAME:  full_name
+LOCATION:  ExecConstraints, execMain.c:2073
+psql:week-05/violations.sql:23: ERROR:  23502: null value in column "due_date" of relation "loan" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 1, 2026-10-20, null, null).
+SCHEMA NAME:  public
+TABLE NAME:  loan
+COLUMN NAME:  due_date
+LOCATION:  ExecConstraints, execMain.c:2073
+psql:week-05/violations.sql:27: ERROR:  23505: duplicate key value violates unique constraint "uq_member_email"
+DETAIL:  Key (email)=(ayse@uni.edu.tr) already exists.
+SCHEMA NAME:  public
+TABLE NAME:  member
+CONSTRAINT NAME:  uq_member_email
+LOCATION:  _bt_check_unique, nbtinsert.c:666
+psql:week-05/violations.sql:31: ERROR:  23505: duplicate key value violates unique constraint "uq_book_isbn"
+DETAIL:  Key (isbn)=(9789750800001) already exists.
+SCHEMA NAME:  public
+TABLE NAME:  book
+CONSTRAINT NAME:  uq_book_isbn
+LOCATION:  _bt_check_unique, nbtinsert.c:666
+psql:week-05/violations.sql:35: ERROR:  23505: duplicate key value violates unique constraint "uq_book_copy_book_copy_no"
+DETAIL:  Key (book_id, copy_no)=(1, 1) already exists.
+SCHEMA NAME:  public
+TABLE NAME:  book_copy
+CONSTRAINT NAME:  uq_book_copy_book_copy_no
+LOCATION:  _bt_check_unique, nbtinsert.c:666
+INSERT 0 1
+psql:week-05/violations.sql:43: ERROR:  23514: new row for relation "book" violates check constraint "chk_book_publish_year"
+DETAIL:  Failing row contains (3, 9780000000007, Gelecekten Gelen Kitap, Roman, 2150).
+SCHEMA NAME:  public
+TABLE NAME:  book
+CONSTRAINT NAME:  chk_book_publish_year
+LOCATION:  ExecConstraints, execMain.c:2125
+INSERT 0 1
+psql:week-05/violations.sql:51: ERROR:  23514: new row for relation "book_copy" violates check constraint "chk_book_copy_copy_no"
+DETAIL:  Failing row contains (4, 1, 0, R-03, available).
+SCHEMA NAME:  public
+TABLE NAME:  book_copy
+CONSTRAINT NAME:  chk_book_copy_copy_no
+LOCATION:  ExecConstraints, execMain.c:2125
+INSERT 0 1
+psql:week-05/violations.sql:60: ERROR:  23514: new row for relation "member" violates check constraint "chk_member_type"
+DETAIL:  Failing row contains (4, Misafir Okur, misafir@uni.edu.tr, YBS, guest).
+SCHEMA NAME:  public
+TABLE NAME:  member
+CONSTRAINT NAME:  chk_member_type
+LOCATION:  ExecConstraints, execMain.c:2125
+psql:week-05/violations.sql:64: ERROR:  23514: new row for relation "book" violates check constraint "chk_book_category"
+DETAIL:  Failing row contains (5, 9780000000012, Futbol Taktikleri, Spor, 2015).
+SCHEMA NAME:  public
+TABLE NAME:  book
+CONSTRAINT NAME:  chk_book_category
+LOCATION:  ExecConstraints, execMain.c:2125
+psql:week-05/violations.sql:67: ERROR:  23514: new row for relation "book_copy" violates check constraint "chk_book_copy_status"
+DETAIL:  Failing row contains (1, 1, 1, R-01, damaged).
+SCHEMA NAME:  public
+TABLE NAME:  book_copy
+CONSTRAINT NAME:  chk_book_copy_status
+LOCATION:  ExecConstraints, execMain.c:2125
+psql:week-05/violations.sql:71: ERROR:  23514: new row for relation "loan" violates check constraint "chk_loan_due_order"
+DETAIL:  Failing row contains (3, 1, 3, 2026-10-20, 2026-10-10, null).
+SCHEMA NAME:  public
+TABLE NAME:  loan
+CONSTRAINT NAME:  chk_loan_due_order
+LOCATION:  ExecConstraints, execMain.c:2125
+INSERT 0 1
+psql:week-05/violations.sql:78: ERROR:  23514: new row for relation "loan" violates check constraint "chk_loan_return_order"
+DETAIL:  Failing row contains (1, 1, 1, 2026-10-01, 2026-10-15, 2026-09-30).
+SCHEMA NAME:  public
+TABLE NAME:  loan
+CONSTRAINT NAME:  chk_loan_return_order
+LOCATION:  ExecConstraints, execMain.c:2125
+INSERT 0 1
+psql:week-05/violations.sql:86: ERROR:  23503: insert or update on table "loan" violates foreign key constraint "fk_loan_member"
+DETAIL:  Key (member_id)=(999) is not present in table "member".
+SCHEMA NAME:  public
+TABLE NAME:  loan
+CONSTRAINT NAME:  fk_loan_member
+LOCATION:  ri_ReportViolation, ri_triggers.c:2663
+psql:week-05/violations.sql:89: ERROR:  23503: update or delete on table "member" violates foreign key constraint "fk_loan_member" on table "loan"
+DETAIL:  Key (member_id)=(1) is still referenced from table "loan".
+SCHEMA NAME:  public
+TABLE NAME:  loan
+CONSTRAINT NAME:  fk_loan_member
+LOCATION:  ri_ReportViolation, ri_triggers.c:2676
+psql:week-05/violations.sql:93: ERROR:  428C9: column "member_id" can only be updated to DEFAULT
+DETAIL:  Column "member_id" is an identity column defined as GENERATED ALWAYS.
+LOCATION:  rewriteTargetListIU, rewriteHandler.c:1003
+psql:week-05/violations.sql:97: ERROR:  23503: insert or update on table "loan" violates foreign key constraint "fk_loan_copy"
+DETAIL:  Key (copy_id)=(999) is not present in table "book_copy".
+SCHEMA NAME:  public
+TABLE NAME:  loan
+CONSTRAINT NAME:  fk_loan_copy
+LOCATION:  ri_ReportViolation, ri_triggers.c:2663
+psql:week-05/violations.sql:101: ERROR:  23503: insert or update on table "book_copy" violates foreign key constraint "fk_book_copy_book"
+DETAIL:  Key (book_id)=(999) is not present in table "book".
+SCHEMA NAME:  public
+TABLE NAME:  book_copy
+CONSTRAINT NAME:  fk_book_copy_book
+LOCATION:  ri_ReportViolation, ri_triggers.c:2663
+psql:week-05/violations.sql:104: ERROR:  23503: update or delete on table "book" violates foreign key constraint "fk_book_copy_book" on table "book_copy"
+DETAIL:  Key (book_id)=(1) is still referenced from table "book_copy".
+SCHEMA NAME:  public
+TABLE NAME:  book_copy
+CONSTRAINT NAME:  fk_book_copy_book
+LOCATION:  ri_ReportViolation, ri_triggers.c:2676
+psql:week-05/violations.sql:107: ERROR:  23503: update or delete on table "author" violates foreign key constraint "fk_book_author_author" on table "book_author"
+DETAIL:  Key (author_id)=(1) is still referenced from table "book_author".
+SCHEMA NAME:  public
+TABLE NAME:  book_author
+CONSTRAINT NAME:  fk_book_author_author
+LOCATION:  ri_ReportViolation, ri_triggers.c:2676
+psql:week-05/violations.sql:110: ERROR:  23503: insert or update on table "book_author" violates foreign key constraint "fk_book_author_book"
+DETAIL:  Key (book_id)=(999) is not present in table "book".
+SCHEMA NAME:  public
+TABLE NAME:  book_author
+CONSTRAINT NAME:  fk_book_author_book
+LOCATION:  ri_ReportViolation, ri_triggers.c:2663
