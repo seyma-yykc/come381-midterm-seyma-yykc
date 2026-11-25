@@ -1,0 +1,27 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Ödev 3 Rapor</title>
+<style>@page{size:A4;margin:18mm 20mm}body{font-family:Helvetica,Arial,sans-serif;font-size:10.5pt;line-height:1.42;color:#000}
+.h{font-weight:bold;border-bottom:1px solid #000;padding-bottom:4px;margin-bottom:10px}h2{font-size:11pt;margin:12px 0 4px}p{margin:0 0 5px}ul{margin:0;padding-left:0;list-style:none}code{font-family:Menlo,monospace;font-size:9.5pt}</style></head><body>
+<div class="h">Şeyma Yayıkçı | 202502009099 | Yönetim Bilişim Sistemleri | Şube 2 | GitHub: seyma-yykc | Ödev 3</div>
+
+<h2>1) Ne yaptım</h2>
+<p>Kampüs Kafe veritabanını <code>kafe.sql</code> ile kurdum ve yöneticinin altı sorusunu SQL ile cevapladım (<code>sorgular.sql</code>). İki NULL deneyini <code>null_deneyi.md</code> dosyasına yazdım. <code>dml.sql</code> içinde BEGIN ile bir işlem açıp Sıcak İçecek fiyatlarını 5 TL artırdım, olmayan bir ürünü eklemeyi denedim ve her şeyi ROLLBACK ile geri aldım. Çıktıları <code>sorgular_cikti.txt</code> ve <code>dml_cikti.txt</code> dosyalarına aldım.</p>
+
+<h2>2) En önemli iki karar ve gerekçesi</h2>
+<p><b>Karar 1:</b> Q5'te INNER JOIN yerine LEFT JOIN kullandım. Emre Şahin hiç sipariş vermemiş; INNER JOIN onu listeden tamamen düşürüyordu. Soru "her müşteri" dediği için onun da 0 siparişle görünmesi gerekiyordu. Bu yüzden COUNT(*) değil COUNT(o.order_id) saydım, yoksa ona yanlışlıkla 1 yazılırdı.</p>
+<p><b>Karar 2:</b> Q6'da ortalamayı ROUND(AVG(price), 2) ile yuvarladım. Sıcak İçecek ortalaması 38,3333... çıkıyor; yönetici için iki basamak yeterli ve okunması daha kolay.</p>
+
+<h2>3) Beklemediğim şey / yaptığım hata</h2>
+<p>NULL Deney 2'de AVG(age) 20,83 verirken SUM(age)/COUNT(*) 15 verdi. İki sebebi var: COUNT(*) yaşı boş olan Elif Yıldız ve Can Arslan'ı da paydaya katıyor (125/8), ayrıca tam sayıyı tam sayıya böldüğü için 15,625 yerine 15 çıkıyor. NULL'ın sıfır gibi davranmadığını ve ortalamayı elle hesaplarken dikkat etmek gerektiğini gördüm. DML'deki hata kodu 23503 (foreign_key_violation): 999 numaralı ürün product tablosunda olmadığı için eklenemedi.</p>
+
+<h2>4) Yapay zeka kullanımı</h2>
+<p>Sorguları, DML dosyasını ve NULL deneyi sonuçlarını Claude (Claude Code) ile hazırladım; sorguları bir PostgreSQL veritabanında çalıştırıp çıktıları aldı. Q5'te INNER JOIN'in sıfır siparişli müşteriyi kaybettiğini kontrol edip LEFT JOIN'e geçildi. Sonuçları kafe verisiyle (8 müşteri, 25 sipariş kalemi) karşılaştırarak doğruladım.</p>
+
+<h2>5) Öz kontrol</h2>
+<ul>
+<li>[x] sorgular.sql: Q1-Q6, her biri yorum satırlarıyla; çıktıda altı sonuç da var</li>
+<li>[x] null_deneyi.md: iki deney, tahmin/sonuç/yorum</li>
+<li>[x] dml.sql: fiyatlar önce 20/35/60, sonra 25/40/65, ROLLBACK sonrası yine 20/35/60</li>
+<li>[x] dml_cikti.txt içinde 23503 hata kodu görünüyor</li>
+<li>[x] Rapor PDF'i reports/odev-3-rapor.pdf yolunda</li>
+</ul>
+</body></html>
