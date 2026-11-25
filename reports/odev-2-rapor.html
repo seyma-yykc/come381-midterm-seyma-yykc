@@ -1,0 +1,20 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Ödev 2 Rapor</title><style>@page{size:A4;margin:18mm 20mm}body{font-family:Helvetica,Arial,sans-serif;font-size:10.5pt;line-height:1.42;color:#000}.h{font-weight:bold;border-bottom:1px solid #000;padding-bottom:4px;margin-bottom:10px}h2{font-size:11pt;margin:12px 0 4px}p{margin:0 0 5px}ul{margin:0;padding-left:0;list-style:none}code{font-family:Menlo,monospace;font-size:9.5pt}</style></head><body>
+<div class="h">AD SOYAD | ÖĞRENCİ NO | Yönetim Bilişim Sistemleri | Şube __ | GitHub: kullanici_adi | Ödev 2</div>
+<h2>1) Ne yaptım</h2>
+<p>Kütüphane şemasına <code>constraints.sql</code> ile NOT NULL, üç UNIQUE (biri çok sütunlu), yedi CHECK ve isimli beş foreign key ekledim. <code>violations.sql</code> içinde 25 test var: 20'si hata vermeli, 5'i sınır ve NULL testi olarak kabul edilmeli; hepsi beklendiği gibi çıktı. <code>on_delete.md</code>'de her foreign key için silme politikasını gerekçelendirdim. <code>algebra.md</code>'de altı soruyu cebir, SQL ve sonuçla yazdım.</p>
+<h2>2) En önemli iki karar ve gerekçesi</h2>
+<p><b>Karar 1:</b> Üye ile ödünç arasındaki foreign key'i RESTRICT yaptım. Ödünç geçmişi kütüphanenin kaydı; elinde iade edilmemiş kitap olan üye silinirse kitabın kimde olduğu bilgisi kaybolur. Buna karşılık book_author için CASCADE seçtim, çünkü kitap silinince yazar eşleşmesinin anlamı kalmıyor.</p>
+<p><b>Karar 2:</b> D6'yı (tüm Bilgisayar kitaplarını almış üyeler) iç içe iki NOT EXISTS ile yazdım. COUNT ile yazılan sürüm, aynı kitabı iki kez alan Okan'ı DISTINCT unutulursa yanlışlıkla listeye alıyor.</p>
+<h2>3) Beklemediğim şey / yaptığım hata</h2>
+<p>Üç sınır testinde id'leri elle yazmıştım (copy_id = 2) ve testler beklenmedik bir foreign key hatası verdi. Başarısız INSERT'lerin de identity sayacını ilerlettiğini öğrendim; testleri alt sorguyla yazınca düzeldi. Ayrıca return_date NULL iken CHECK'in satırı reddetmediğini gördüm: sonuç UNKNOWN olunca kabul ediliyor.</p>
+<h2>4) Yapay zeka kullanımı</h2>
+<p>Ödevin tamamı Claude (Claude Code) ile hazırlandı ve PostgreSQL 16'da çalıştırıldı. D6 için Claude Haiku'nun sorgusu bu veride doğru çıktı; kategoride hiç kitap yokken (boş bölen) division'dan farklı davrandığı bulundu. Ayrıntı <code>AI_LOG.md</code> içinde "Ödev 2" başlığında.</p>
+<h2>5) Öz kontrol</h2>
+<ul>
+<li>[x] constraints.sql hatasız çalışıyor, her constraint'in adı ve yorumu var</li>
+<li>[x] violations.sql: 25 test, 5 sınır testi, 1 NULL testi; çıktı psql'den alındı</li>
+<li>[x] on_delete.md beş foreign key'i kapsıyor; CASCADE, RESTRICT, NO ACTION</li>
+<li>[x] algebra.md: altı soru, iki hesap ifadesi, DISTINCT notları, D4'ün iki yolu</li>
+<li>[x] AI_LOG.md'de D6 denemesi var</li>
+<li>[ ] Son teslim (25 Ekim) geçti; geç teslim</li>
+</ul></body></html>

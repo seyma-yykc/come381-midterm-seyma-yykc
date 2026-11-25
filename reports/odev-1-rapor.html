@@ -1,0 +1,19 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><title>Ödev 1 Rapor</title><style>@page{size:A4;margin:18mm 20mm}body{font-family:Helvetica,Arial,sans-serif;font-size:10.5pt;line-height:1.42;color:#000}.h{font-weight:bold;border-bottom:1px solid #000;padding-bottom:4px;margin-bottom:10px}h2{font-size:11pt;margin:12px 0 4px}p{margin:0 0 5px}ul{margin:0;padding-left:0;list-style:none}code{font-family:Menlo,monospace;font-size:9.5pt}</style></head><body>
+<div class="h">AD SOYAD | ÖĞRENCİ NO | Yönetim Bilişim Sistemleri | Şube __ | GitHub: kullanici_adi | Ödev 1</div>
+<h2>1) Ne yaptım</h2>
+<p>Kampüs kütüphanesi için kitap ödünç takibi yapan bir veritabanı tasarladım. <code>docs/er.md</code> dosyasında Mermaid ile altı varlık var: member, book, author, book_copy, loan ve M:N ilişki için book_author ara tablosu. <code>sql/schema.sql</code> bu tabloları primary key ve foreign key'lerle kuruyor ve temiz bir veritabanında hatasız çalışıyor. README'ye senaryoyu ve kitap ile nüshayı ayırma kararımı yazdım.</p>
+<h2>2) En önemli iki karar ve gerekçesi</h2>
+<p><b>Karar 1:</b> Kitabı (book) ve raftaki fiziksel nüshayı (book_copy) iki ayrı tablo yaptım. Kütüphanede aynı kitabın birden çok nüshası olabiliyor ve ödünç verilen şey nüsha. Bu yüzden loan tablosu book'a değil book_copy'ye bağlı; böylece hangi nüshanın kimde olduğu da biliniyor.</p>
+<p><b>Karar 2:</b> Kitap ile yazar arasındaki ilişkiyi book_author ara tablosuyla kurdum ve birincil anahtarını (book_id, author_id) yaptım. Fundamentals of Database Systems gibi iki yazarlı kitaplar var; yazarı book tablosunda tek sütunda tutsaydım ikinci yazara yer kalmazdı.</p>
+<h2>3) Beklemediğim şey / yaptığım hata</h2>
+<p>İlk çizimde kitap ile nüsha arasını "her kitabın en az bir nüshası vardır" diye işaretlemiştim. Sonra sipariş edilmiş ama henüz rafa gelmemiş bir kitabın da katalogda olabileceğini fark ettim. Kardinaliteyi "sıfır ya da çok" olarak düzelttim. Ayrıca loan tablosunda aynı üyenin aynı kitabı ikinci kez alabilmesi için (member, copy) çiftine UNIQUE koymadım; her ödünç ayrı bir olay.</p>
+<h2>4) Yapay zeka kullanımı</h2>
+<p>Senaryo, ER diyagramı, şema ve README Claude (Claude Code) ile hazırlandı; şema PostgreSQL 16'da çalıştırılarak denendi. Ayrıntı <code>AI_LOG.md</code> içinde "Ödev 1" başlığında. Kardinalite hatası bu kontrol sırasında bulunup düzeltildi.</p>
+<h2>5) Öz kontrol</h2>
+<ul>
+<li>[x] docs/er.md GitHub'da çizim olarak görünüyor</li>
+<li>[x] sql/schema.sql temiz bir veritabanında hatasız çalışıyor (6 tablo, 1 M:N ara tablo)</li>
+<li>[x] Her tabloda primary key, ilişkilerde foreign key var</li>
+<li>[x] README'de senaryo ve bir tasarım kararı var</li>
+<li>[ ] Son teslim (25 Ekim) geçti; geç teslim olarak 80 üzerinden değerlendirilecek</li>
+</ul></body></html>
